@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leveraging Mutual Intra-Modal Similarity Supervision for Text and Audio</title>
+  <meta name="description" content="Interspeech 2026 paper: intra-modal text-text and audio-audio similarities as soft targets for contrastive language-audio pre-training.">
+  <meta name="keywords" content="zero-shot classification, audio retrieval, text retrieval, representation learning, contrastive learning, CLAP">
+
+  <!-- Social previews -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Leveraging Mutual Intra-Modal Similarity Supervision for Text and Audio">
+  <meta property="og:description" content="Intra-modal text-text and audio-audio similarities as soft targets for contrastive language-audio training. Interspeech 2026.">
+  <meta property="og:url" content="https://von-aspern.github.io/mimss/">
+  <meta property="og:image" content="https://von-aspern.github.io/mimss/static/images/training_setup.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Google Scholar -->
+  <meta name="citation_title" content="Leveraging Mutual Intra-Modal Similarity Supervision for Text and Audio">
+  <meta name="citation_author" content="von Aspern, Julian Miguel">
+  <meta name="citation_author" content="Defraene, Bruno">
+  <meta name="citation_author" content="Vafeiadis, Anastasios">
+  <meta name="citation_author" content="Kutscher, Oleksiy">
+  <meta name="citation_author" content="Seidel, Ernst">
+  <meta name="citation_author" content="Fingscheidt, Tim">
+  <meta name="citation_conference_title" content="Interspeech 2026">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_pdf_url" content="https://von-aspern.github.io/mimss/static/pdfs/paper.pdf">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔊</text></svg>">
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="has-text-centered">
+        <h1 class="title is-1 publication-title">Leveraging Mutual Intra-Modal Similarity Supervision for Text and Audio</h1>
+
+        <div class="is-size-5 publication-authors">
+          <span class="author-block"><a href="https://orcid.org/0009-0007-7725-776X">Julian Miguel von Aspern</a><sup>1</sup>,</span>
+          <span class="author-block"><a href="https://orcid.org/0009-0002-7460-3341">Bruno Defraene</a><sup>2</sup>,</span>
+          <span class="author-block"><a href="https://orcid.org/0000-0003-1102-5708">Anastasios Vafeiadis</a><sup>2</sup>,</span>
+          <span class="author-block"><a href="https://orcid.org/0009-0006-8012-8881">Oleksiy Kutscher</a><sup>1</sup>,</span>
+          <span class="author-block"><a href="https://orcid.org/0009-0001-2114-0788">Ernst Seidel</a><sup>1</sup>,</span>
+          <span class="author-block"><a href="https://orcid.org/0000-0002-8895-5041">Tim Fingscheidt</a><sup>1</sup></span>
+        </div>
+
+        <div class="is-size-5 publication-authors">
+          <span class="author-block"><sup>1</sup>Institute for Communications Technology, Technische Universität Braunschweig</span>
+          <span class="author-block"><sup>2</sup>NXP Semiconductors, Leuven</span>
+        </div>
+
+        <div class="is-size-5 publication-venue">Interspeech 2026, Sydney, Australia &middot; Oral</div>
+
+        <div class="publication-links">
+          <span class="link-block">
+            <a href="static/pdfs/paper.pdf" class="button is-normal is-rounded is-dark">
+              <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="static/pdfs/slides.pdf" class="button is-normal is-rounded is-dark">
+              <span class="icon"><i class="fas fa-person-chalkboard"></i></span><span>Slides</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="https://www.researchgate.net/publication/415233173_Leveraging_Mutual_Intra-Modal_Similarity_Supervision_for_Text_and_Audio" class="button is-normal is-rounded is-dark">
+              <span class="icon"><i class="fab fa-researchgate"></i></span><span>ResearchGate</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="#bibtex" class="button is-normal is-rounded is-dark">
+              <span class="icon"><i class="fas fa-quote-right"></i></span><span>BibTeX</span>
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="static/images/training_setup.png" alt="Training setup: baseline (purple), intra-modal similarities as soft targets (blue), target uncertainty estimation (green), modality classification (yellow)">
+      <h2 class="subtitle has-text-centered">
+        <b>Our training setup</b> with the baseline's first stage in the purple area. In the blue area, we produce
+        intra-modal similarities and use them as soft targets. The green area's uncertainty estimation pipelines
+        enhance similarity mixing. The yellow area is optional, aiming to reduce the modality gap.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Contrastive <i>inter</i>-modal representation learning is powerful in zero-shot classification,
+            text-queried audio retrieval, and audio-queried text retrieval. Recently, image-text contrastive
+            learning has been proposed with soft labels generated from text-text similarities between all
+            samples in a batch. As our first contribution, we use such <i>intra</i>-modal text-text similarities
+            as inter-modal text-audio similarity <i>targets</i>. Second, we generalize this to also gain
+            information from audio-audio similarities. Third, we propose a method to obtain <i>similarity
+            targets</i> from these intra-modal similarities using uncertainty estimation. We further investigate
+            additionally employing a modality classification branch and using MSE-guided estimation. Finally,
+            in a specified training regime, we show that our methods are competitive with SOTA on a number of
+            downstream tasks, while using only a fraction of training data and batch size. Our utilized training
+            data and pre-trained models are publicly available.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">Oral Presentation Slides</h2>
+    <div class="slide-viewer" tabindex="0" aria-label="Slide viewer, use left and right arrow keys">
+      <img id="slide-img" src="static/images/slides/slide-01.jpg" alt="Slide 1">
+      <div class="slide-controls">
+        <button class="button is-small is-rounded" id="slide-prev" aria-label="Previous slide"><i class="fas fa-chevron-left"></i></button>
+        <span id="slide-count">1 / 12</span>
+        <button class="button is-small is-rounded" id="slide-next" aria-label="Next slide"><i class="fas fa-chevron-right"></i></button>
+        <a class="button is-small is-rounded" href="static/pdfs/slides.pdf"><span class="icon"><i class="fas fa-download"></i></span><span>PDF</span></a>
+      </div>
+    </div>
+    <p class="slides-note has-text-centered">
+      Also on <a href="https://www.researchgate.net/publication/415232897_Oral_Slides">ResearchGate</a>.
+    </p>
+  </div>
+</section>
+
+<section class="section" id="bibtex">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <div class="bibtex-wrap">
+      <button class="button is-small copy-btn" id="copy-bib"><span class="icon"><i class="far fa-copy"></i></span><span>Copy</span></button>
+<pre><code id="bib">@inproceedings{vonaspern2026,
+  title     = {{Leveraging Mutual Intra-Modal Similarity Supervision for Text and Audio}},
+  author    = {von Aspern, Julian Miguel and Defraene, Bruno and Vafeiadis, Anastasios
+               and Kutscher, Oleksiy and Seidel, Ernst and Fingscheidt, Tim},
+  booktitle = {Proc. of Interspeech},
+  year      = {2026},
+  month = sep,
+  address = {Sydney, Australia},
+  pages     = {1292--1296},
+  doi       = {10.21437/Interspeech.2026-3300},
+}</code></pre>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        Page layout adapted from the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> project page,
+        licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script src="static/js/index.js"></script>
+</body>
+</html>
