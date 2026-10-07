@@ -6,3 +6,4 @@ Julian Miguel von Aspern, Bruno Defraene, Anastasios Vafeiadis, Oleksiy Kutscher
 
 - Paper: [static/pdfs/paper.pdf](static/pdfs/paper.pdf)
 - Oral slides: [static/pdfs/slides.pdf](static/pdfs/slides.pdf)
+- ISCA Archive: https://www.isca-archive.org/interspeech_2026/vonaspern26_interspeech.html
